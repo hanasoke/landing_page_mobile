@@ -81,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // SEARCH BAR
             TextField(
               decoration: InputDecoration(
-                hintText: 'Cari kos (lokasi / nama)',
+                hintText: 'Cari Kamar Kos',
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -110,12 +110,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   kosCard(
                     nama: 'Kamar Konohagakure',
-                    lokasi: 'Dekat Kampus',
+                    lokasi: 'Lantai 1',
                     harga: 'Rp 800.000 / bulan',
                   ),
                   kosCard(
                     nama: 'Kamar Iwagakure ',
-                    lokasi: 'Dekat jalan sirojul munir',
+                    lokasi: 'Lantai 2',
                     harga: 'Rp 1.200.000 / bulan',
                   ),
                 ],
