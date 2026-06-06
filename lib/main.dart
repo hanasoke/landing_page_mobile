@@ -106,19 +106,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
             // LIST KOS
             Expanded(
-              child: ListView(
+              child: GridView.count(
+                crossAxisCount: 2,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                childAspectRatio: 0.75,
                 children: [
-                  kosCard(
-                    nama: 'Kamar Konohagakure',
-                    lokasi: 'Lantai 1',
-                    harga: 'Rp 800.000 / bulan',
-                  ),
-                  kosCard(
-                    nama: 'Kamar Iwagakure ',
-                    lokasi: 'Lantai 2',
-                    harga: 'Rp 1.200.000 / bulan',
-                  ),
-                ],
+                  
+                ]
               ),
             ),
           ],
