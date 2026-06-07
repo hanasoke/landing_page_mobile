@@ -174,6 +174,16 @@ Widget kosImageCard({
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
+                nama,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(lokasi, style: TextStyle(color: Colors.grey)),
+              const SizedBox(height: 4),
+              Text(
                 harga,
                 style: const TextStyle(
                   color: Colors.green,
