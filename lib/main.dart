@@ -112,8 +112,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisSpacing: 12,
                 childAspectRatio: 0.75,
                 children: [
-                  
-                ]
+                  kosImageCard(
+                    imagePath: 'assets/kosan/room_1.jpg',
+                    nama: 'Kamar Konohagakure',
+                    lokasi: 'Lantai 1',
+                    harga: 'Rp 800.000 / bulan',
+                  ),
+                ],
               ),
             ),
           ],
@@ -123,19 +128,44 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-Widget kosCard({
+Widget kosImageCard({
+  required String imagePath,
   required String nama,
   required String lokasi,
   required String harga,
 }) {
   return Card(
-    margin: const EdgeInsets.only(bottom: 12),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-    child: ListTile(
-      leading: Icon(Icons.home, size: 40),
-      title: Text(nama, style: TextStyle(fontWeight: FontWeight.bold)),
-      subtitle: Text(lokasi),
-      trailing: Text(harga, style: TextStyle(color: Colors.green)),
+    elevation: 4,
+    clipBehavior: Clip.antiAlias,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // GAMBAR KAMAR
+        Expanded(
+          child: Image.asset(
+            imagePath,
+            width: double.infinity,
+            fit: BoxFit.cover,
+          ),
+        ),
+
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                harga,
+                style: const TextStyle(
+                  color: Colors.green,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     ),
   );
 }
