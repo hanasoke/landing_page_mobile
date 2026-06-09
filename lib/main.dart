@@ -197,3 +197,26 @@ Widget kosImageCard({
     ),
   );
 }
+
+class DetailKamarPage extends StatelessWidget {
+  final String imagePath;
+  final String nama;
+  final String lokasi;
+  final String harga;
+
+  const DetailKamarPage({
+    super.key,
+    required this.imagePath,
+    required this.nama,
+    required this.lokasi,
+    required this.harga,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(appBar: AppBar(title: Text(nama)));
+
+    // TODO: implement build
+    throw UnimplementedError();
+  }
+}
