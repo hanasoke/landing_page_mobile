@@ -214,9 +214,77 @@ class DetailKamarPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text(nama)));
+    return Scaffold(
+      appBar: AppBar(title: Text(nama)),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // GAMBAR UTAMA
+            Image.asset(
+              imagePath,
+              width: double.infinity,
+              height: 220,
+              fit: BoxFit.cover,
+            ),
 
-    // TODO: implement build
-    throw UnimplementedError();
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    nama,
+                    style: const TextStyle(
+                      color: Colors.green,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  const Text(
+                    'fasilitas',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // ICON FASILITAS
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      fasilitasIcon('assets/icons/bedroom.png', 'Kamar'),
+                      fasilitasIcon('assets/icons/bedroom.png', 'Kamar'),
+                      fasilitasIcon('assets/icons/bedroom.png', 'Kamar'),
+                    ],
+                  ),
+
+                  const SizedBox(height: 32),
+
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: const Text('Pesan Kamar'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget fasilitasIcon(String iconPath, String label) {
+    return Column(
+      children: [
+        Image.asset(iconPath, width: 40, height: 40),
+        const SizedBox(height: 6),
+        Text(label, style: const TextStyle(fontSize: 12)),
+      ],
+    );
   }
 }
