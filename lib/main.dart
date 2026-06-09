@@ -113,24 +113,28 @@ class _MyHomePageState extends State<MyHomePage> {
                 childAspectRatio: 0.75,
                 children: [
                   kosImageCard(
+                    context: context,
                     imagePath: 'assets/kosan/room_1.jpg',
                     nama: 'Kamar Konohagakure',
                     lokasi: 'Lantai 1',
                     harga: 'Rp 800.000 / bulan',
                   ),
                   kosImageCard(
+                    context: context,
                     imagePath: 'assets/kosan/room_2.jpg',
                     nama: 'Kamar Iwagakure',
                     lokasi: 'Lantai 2',
                     harga: 'Rp 1.200.000 / bulan',
                   ),
                   kosImageCard(
+                    context: context,
                     imagePath: 'assets/kosan/room_3.jpg',
                     nama: 'Kamar Sunagakure',
                     lokasi: 'Lantai 1',
                     harga: 'Rp 900.000 / bulan',
                   ),
                   kosImageCard(
+                    context: context,
                     imagePath: 'assets/kosan/room_4.jpg',
                     nama: 'Kamar Kirigakure',
                     lokasi: 'Lantai 2',
@@ -147,53 +151,62 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 Widget kosImageCard({
+  required BuildContext context,
   required String imagePath,
   required String nama,
   required String lokasi,
   required String harga,
 }) {
-  return Card(
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-    elevation: 4,
-    clipBehavior: Clip.antiAlias,
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // GAMBAR KAMAR
-        Expanded(
-          child: Image.asset(
-            imagePath,
-            width: double.infinity,
-            fit: BoxFit.cover,
+  return InkWell(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => DetailKamarPage(
+            imagePath: imagePath,
+            nama: nama,
+            lokasi: lokasi,
+            harga: harga,
           ),
         ),
+      );
+    },
+    child: Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      elevation: 4,
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Image.asset(
+              imagePath,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
+          ),
 
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                nama,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(nama, style: const TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 4),
+                Text(lokasi, style: TextStyle(color: Colors.grey)),
+                const SizedBox(height: 4),
+                Text(
+                  harga,
+                  style: const TextStyle(
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 4),
-              Text(lokasi, style: TextStyle(color: Colors.grey)),
-              const SizedBox(height: 4),
-              Text(
-                harga,
-                style: const TextStyle(
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
 }
