@@ -267,9 +267,9 @@ class DetailKamarPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      fasilitasIcon('assets/icons/bedroom.png', 'Kamar'),
-                      fasilitasIcon('assets/icons/bedroom.png', 'Kamar'),
-                      fasilitasIcon('assets/icons/bedroom.png', 'Kamar'),
+                      fasilitasIcon('assets/icons/bedroom.png', 'Bedroom'),
+                      fasilitasIcon('assets/icons/bathroom.png', 'Bathroom'),
+                      fasilitasIcon('assets/icons/kitchen.png', 'Kitchen'),
                     ],
                   ),
 
