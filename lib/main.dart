@@ -82,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ),
     Kamar(
       imagePath: 'assets/kosan/room_5.jpg',
-      nama: 'Kamar Konohagakure',
+      nama: 'Kamar Itagakure',
       lokasi: 'Lantai 1',
       harga: 800000,
     ),
@@ -100,11 +100,41 @@ class _MyHomePageState extends State<MyHomePage> {
     ),
     Kamar(
       imagePath: 'assets/kosan/room_8.jpg',
-      nama: 'Kamar Hoshigakure',
+      nama: 'Kamar Kyushu',
       lokasi: 'Lantai 2',
       harga: 1200000,
     ),
+
+    // tambahkan lainnya
   ];
+
+  List<Kamar> kamarTampil = [];
+
+  String keyword = '';
+  int? hargaMin;
+  int? hargaMax;
+
+  @override
+  void initState() {
+    super.initState();
+    kamarTampil = semuaKamar;
+  }
+
+  void filterKamar() {
+    setState(() {
+      kamarTampil = semuaKamar.where((kamar) {
+        final cocokNama = kamar.nama.toLowerCase().contains(
+          keyword.toLowerCase(),
+        );
+
+        final cocokHargaMin = hargaMin == null || kamar.harga >= hargaMin!;
+
+        final cocokHargaMax = hargaMax == null || kamar.harga <= hargaMax!;
+
+        return cocokNama && cocokHargaMin && cocokHargaMax;
+      }).toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -119,6 +149,10 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             // SEARCH BAR
             TextField(
+              onChanged: (value) {
+                keyword = value;
+                filterKamar();
+              },
               decoration: InputDecoration(
                 hintText: 'Cari Kamar Kos',
                 prefixIcon: Icon(Icons.search),
@@ -134,9 +168,52 @@ class _MyHomePageState extends State<MyHomePage> {
             Row(
               children: [
                 ElevatedButton.icon(
-                  onPressed: () {},
                   icon: Icon(Icons.filter_list),
                   label: Text('Filter'),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (_) {
+                        int min = hargaMin ?? 0;
+                        int max = hargaMax ?? 2000000;
+
+                        return AlertDialog(
+                          title: Text('Filter Harga'),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              TextField(
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  labelText: 'Harga Minimum',
+                                ),
+                                onChanged: (v) => min = int.tryParse(v) ?? 0,
+                              ),
+                              TextField(
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  labelText: 'Harga Maksimum',
+                                ),
+                                onChanged: (v) =>
+                                    min = int.tryParse(v) ?? 2000000,
+                              ),
+                            ],
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                hargaMin = min;
+                                hargaMax = max;
+                                filterKamar();
+                                Navigator.pop(context);
+                              },
+                              child: Text('Terapkan'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
                 ),
               ],
             ),
@@ -145,69 +222,24 @@ class _MyHomePageState extends State<MyHomePage> {
 
             // LIST KOS
             Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
-                childAspectRatio: 0.75,
-                children: [
-                  kosImageCard(
+              child: GridView.builder(
+                itemCount: kamarTampil.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                  childAspectRatio: 0.75,
+                ),
+                itemBuilder: (context, index) {
+                  final kamar = kamarTampil[index];
+                  return kosImageCard(
                     context: context,
-                    imagePath: 'assets/kosan/room_1.jpg',
-                    nama: 'Kamar Konohagakure',
-                    lokasi: 'Lantai 1',
-                    harga: 'Rp 800.000 / bulan',
-                  ),
-                  kosImageCard(
-                    context: context,
-                    imagePath: 'assets/kosan/room_2.jpg',
-                    nama: 'Kamar Iwagakure',
-                    lokasi: 'Lantai 2',
-                    harga: 'Rp 1.200.000 / bulan',
-                  ),
-                  kosImageCard(
-                    context: context,
-                    imagePath: 'assets/kosan/room_3.jpg',
-                    nama: 'Kamar Sunagakure',
-                    lokasi: 'Lantai 1',
-                    harga: 'Rp 900.000 / bulan',
-                  ),
-                  kosImageCard(
-                    context: context,
-                    imagePath: 'assets/kosan/room_4.jpg',
-                    nama: 'Kamar Kirigakure',
-                    lokasi: 'Lantai 2',
-                    harga: 'Rp 1.100.000 / bulan',
-                  ),
-                  kosImageCard(
-                    context: context,
-                    imagePath: 'assets/kosan/room_5.jpg',
-                    nama: 'Kamar Konohagakure',
-                    lokasi: 'Lantai 1',
-                    harga: 'Rp 800.000 / bulan',
-                  ),
-                  kosImageCard(
-                    context: context,
-                    imagePath: 'assets/kosan/room_6.jpg',
-                    nama: 'Kamar Amegakure',
-                    lokasi: 'Lantai 2',
-                    harga: 'Rp 1.200.000 / bulan',
-                  ),
-                  kosImageCard(
-                    context: context,
-                    imagePath: 'assets/kosan/room_7.jpg',
-                    nama: 'Kamar Hoshigakure',
-                    lokasi: 'Lantai 2',
-                    harga: 'Rp 1.200.000 / bulan',
-                  ),
-                  kosImageCard(
-                    context: context,
-                    imagePath: 'assets/kosan/room_8.jpg',
-                    nama: 'Kamar Hoshigakure',
-                    lokasi: 'Lantai 2',
-                    harga: 'Rp 1.200.000 / bulan',
-                  ),
-                ],
+                    imagePath: kamar.imagePath,
+                    nama: kamar.nama,
+                    lokasi: kamar.lokasi,
+                    harga: 'Rp ${kamar.harga.toString()} / bulan',
+                  );
+                },
               ),
             ),
           ],
