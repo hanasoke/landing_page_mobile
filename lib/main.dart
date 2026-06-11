@@ -51,14 +51,60 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
       _counter++;
     });
   }
+
+  final List<Kamar> semuaKamar = [
+    Kamar(
+      imagePath: 'assets/kosan/room_1.jpg',
+      nama: 'Kamar Konohagakure',
+      lokasi: 'Lantai 1',
+      harga: 800000,
+    ),
+    Kamar(
+      imagePath: 'assets/kosan/room_2.jpg',
+      nama: 'Kamar Iwagakure',
+      lokasi: 'Lantai 2',
+      harga: 2000000,
+    ),
+    Kamar(
+      imagePath: 'assets/kosan/room_3.jpg',
+      nama: 'Kamar Sunagakure',
+      lokasi: 'Lantai 1',
+      harga: 900000,
+    ),
+    Kamar(
+      imagePath: 'assets/kosan/room_4.jpg',
+      nama: 'Kamar Kirigakure',
+      lokasi: 'Lantai 2',
+      harga: 1100000,
+    ),
+    Kamar(
+      imagePath: 'assets/kosan/room_5.jpg',
+      nama: 'Kamar Konohagakure',
+      lokasi: 'Lantai 1',
+      harga: 800000,
+    ),
+    Kamar(
+      imagePath: 'assets/kosan/room_6.jpg',
+      nama: 'Kamar Amegakure',
+      lokasi: 'Lantai 2',
+      harga: 1200000,
+    ),
+    Kamar(
+      imagePath: 'assets/kosan/room_7.jpg',
+      nama: 'Kamar Hoshigakure',
+      lokasi: 'Lantai 2',
+      harga: 1200000,
+    ),
+    Kamar(
+      imagePath: 'assets/kosan/room_8.jpg',
+      nama: 'Kamar Hoshigakure',
+      lokasi: 'Lantai 2',
+      harga: 1200000,
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
